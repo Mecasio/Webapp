@@ -1,0 +1,101 @@
+@font-face {
+    font-family: "Horizon";
+    src: url('NEW UPDATED VERSION/horizon.otf') format('woff2'),
+         url('NEW UPDATED VERSION/horizon_outlined.otf') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;  
+    text-decoration: none;
+}
+
+body{
+    height: 100vh;
+    overflow: hidden;
+    background-image: url('Background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.web-char img{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    width: 600px;
+    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
+    transform: translate(-50%, -50%);
+}
+
+.web-elem img{
+    width: 250px;
+    position: absolute;
+}
+
+.web-elem img:first-child{
+    bottom: 4%;
+    left: 2%;
+}
+
+.web-elem img:last-child{
+    transform: rotate(180deg);
+    right: 2%;
+    top: 4%;
+}
+
+p {  
+    position: absolute;
+    left: 5.3%;
+    bottom: 5%;
+    font-size: 9em;
+    line-height: 1em;
+    font-weight: 900;
+    filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.9));
+    -webkit-text-stroke: 4px white;
+    color: transparent;
+    font-family: "Horizon", sans-serif;
+}
+
+.login-btn{
+    position: absolute;
+    top: 8%;
+    left: 5.5%;
+}
+
+.login-btn a{
+    font-family: "Horizon", sans-serif;
+    letter-spacing: 10px;
+    font-size: 20px;
+    color: #362F27;
+    cursor: pointer;
+}
+
+.login-btn a:hover{
+    color: transparent;
+    transition: 0.5s ease-in;
+    -webkit-text-stroke: 1px white;
+}
+
+.Footer-cont{
+    position: absolute;
+    right: 2%;
+    bottom: 8%;
+    font-family: "Horizon", sans-serif;
+}
+
+.Footer {
+    display: grid;
+    text-align: justify;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 20px;
+    list-style: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Footer li{
+    margin-right: 40px;
+}
+

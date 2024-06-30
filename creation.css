@@ -1,0 +1,112 @@
+body {
+    height: 97vh;
+    display: flex;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://wallpapers.com/images/hd/pixel-landscape-2f68t4t9xy73gxn0.jpg");
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 10px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+h1 {
+    text-align: center;
+}
+
+.character-preview-container {
+    position: relative;
+    width: 192px;
+    image-rendering: pixelated;
+    height: 192px; 
+}
+
+.character-sprite {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.character-container{
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.character-creation-form{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-character{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.user-character label{
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.user-character select{
+    width: 150px;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.character-content{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    border: solid 2px black;
+}
+
+.option-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+}
+
+.character-button {
+    display: flex;
+    justify-content: center;
+}
+
+.character-button button{
+    width: 50%;
+    padding: 5px 0;
+    height: 35px;
+    border-radius: 10px;
+    transition: 0.2s;
+    border: 1px solid black;
+}
+
+.character-button button:hover{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#character-shadow{
+    top: 3%;
+}

@@ -1,0 +1,147 @@
+/* Profile */
+
+.profile-view-container {
+    display: none; 
+    z-index: 1; 
+    padding-top: 119px; 
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 80px;
+}
+
+.profile-view-content {
+    background-color: #fefefe;
+    position: absolute;
+    top: 48.3%;
+    left: 50%; 
+    padding: 15px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.profile-view-container1 {
+    display: none; 
+    z-index: 1; 
+    padding-top: 119px; 
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 80px;
+}
+
+.profile-view-content1 {
+    background-color: #fefefe;
+    position: absolute;
+    top: 48.3%;
+    left: 50%; 
+    padding: 15px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+
+.profile-view-container.is-active,
+.profile-view-container1.is-active{
+    display: block;
+}
+
+.profile-content-container{
+    padding: 0 20px;
+}
+
+.profile-navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-user-details{
+    padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-user-image{
+    padding: 0 20px;
+}
+
+.profile-user-image img{
+    width: 120px;
+    border-radius: 50%;
+}
+
+.profile-user-menu{
+    padding: 0 40px;
+}
+
+.profile-user-menu ul{
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    width: fit-content;
+    list-style: none;
+    align-items: center;
+    border: solid 0.5px #e0e0e0;
+}
+
+.profile-user-menu ul li{
+    text-decoration: none;
+    cursor: pointer;
+    padding: 7px 20px;
+    border-left: solid 0.5px #e0e0e0;
+    width: 100px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: gray;
+}
+
+.profile-user-menu ul .info{
+    border: none;
+}
+
+.profile-user-menu ul .this-is-active{
+    color: black;
+}
+
+.profile-user-menu ul li:hover{
+    background-color: #ebebed;
+}
+
+.profile-body{
+    padding: 20px;
+}
+
+.profile-body-content{
+    padding: 20px 0;
+    overflow: scroll;
+    height: 330px;
+    scrollbar-width: none;
+    border-width: 1px;
+    border-color: #ebebed;
+    border-style: solid none none none;
+}
+
+.profile-user-data{
+    display: flex;
+    padding: 20px;
+    color: #b8b6b6;
+}
+
+.data-field{
+    width: 50%;
+}
+
+.data-con{
+    border-bottom: solid 1px #ebebed;
+}
+
+.user-data{
+    color: #545454;
+}

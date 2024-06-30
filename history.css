@@ -1,0 +1,28 @@
+/* History */
+
+.history-view-container {
+    display: none; 
+    z-index: 1; 
+    padding-top: 119px; 
+    width: 98%;
+    max-width: 102%;
+    position: absolute;
+    height: 100%; 
+    left: 10px;
+    right: 80px;
+}
+
+.history-view-content {
+    background-color: #fefefe;
+    position: absolute;
+    top: 48.3%;
+    left: 50.3%; 
+    padding: 15px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    height: 572px;
+}
+
+.history-view-container.is-active{
+    display: block;
+}

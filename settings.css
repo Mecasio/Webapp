@@ -1,0 +1,113 @@
+.user-field-input{
+    display: flex;
+    gap: 5px;
+    font-size: 15px;
+    margin-top: 20px;
+    color: gray;
+    flex-direction: column;
+}
+
+.user-field-input input{
+    height: 28px;
+    outline: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0 10px;
+}
+
+.user-field-inputs{
+    display: flex;
+    gap: 20px;
+    font-size: 15px;
+    padding: 20px 0;
+    color: gray;
+    outline: none;
+    border-bottom: solid 0.5px #e0e0e0;
+}
+
+.place-res{
+    display: flex;
+    width: 50%;
+    gap: 5px;
+    font-size: 15px;
+    flex-direction: column;
+}
+
+.nationality{
+    display: flex;
+    width: 50%;
+    gap: 5px;
+    font-size: 15px;
+    flex-direction: column;
+}
+
+.place-res input, .nationality input{
+    height: 28px;
+    outline: none;
+    padding: 0 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.change-password{
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 0.5px #e0e0e0;
+}
+
+.change-password >*{
+    gap: 5px;
+}
+
+.change-password >* input{
+    outline: none;
+    padding: 0 10px;
+}
+
+.pass-field{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.user-field-input-char{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.user-field-input-char button{
+    width: 150px;
+    padding: 5px 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.user-field-input-btn{
+    display: flex;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.user-field-input-btn input{
+    width: 100px;
+    padding: 5px 0;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 24px;
+    border: solid 1px black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;   
+}
+
+.change-password .pass-field i{
+    position: absolute;
+    right: 10px;
+    color: #ccc;
+    top: 60%;
+    cursor: pointer;
+}
+
+.change-password .pass-field i.active::before{
+    content: "\f070";
+    color: #333;
+}

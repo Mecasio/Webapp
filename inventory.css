@@ -1,0 +1,217 @@
+/* Inventory */
+
+.inventory-view-container {
+    display: none; 
+    z-index: 1; 
+    padding-top: 119px; 
+    width: 98%;
+    max-width: 102%;
+    position: absolute;
+    height: 100%; 
+    left: 10px;
+    right: 80px;
+}
+
+.inventory-view-content {
+    background-color: white;
+    position: absolute;
+    top: 48.3%;
+    left: 50.3%; 
+    padding: 15px;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    height: 572px;
+}
+
+.inventory-view-container.is-active{
+    display: block;
+}
+
+.storage-inventory{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+#inventory {
+    display: grid;
+    grid-template: repeat(4, auto) / repeat(5, auto);
+    grid-gap: 10px;
+    padding: 15px;
+    margin-right: 50px;
+    color: white;
+}
+
+.inventory__slot {
+    width: 57px; height: 57px;
+    border: 1px solid white;
+    outline: 1px solid transparent;
+    transition: all .2s ease;
+    background: rgba(45, 55, 66, .6);
+}
+
+.inventory__slot:hover {
+    outline-offset: -7px;
+    outline-width: 2px;
+    outline-color: #00ff1a;
+    border: .2px solid #00ff1a;
+}
+
+.inventory__slot:active {
+    outline: none;
+    border: none;
+}
+
+.slot__item {
+    transition: all .2s ease;
+    position: relative;
+}
+
+.item__img {
+    transition: all .2s ease;
+    width: 100%; height: 100%;
+}
+
+.inventory__slot:hover .item__img {
+    margin: -10%;
+    width: 120%; height: 120%;
+}
+
+.item__quantity {
+    position: absolute;
+    bottom: 5%; right: 5%;
+    margin: 0;
+    font-family: arial;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+} 
+
+.inventory-nav{
+    position: relative;
+}
+
+.inventory-navbar {
+    padding: 0 15px;
+}
+
+.inventory-navbar h1{
+    font-size: 40px;
+    color: black; 
+    margin: 9px 0;
+}
+
+.inventory-filter{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 72.5%;
+    right: 3%;
+    cursor: pointer;
+    align-items: center;
+}
+
+.inventory-filter p{
+    font-size: 18px;
+}
+
+.inventory-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.balance-content{
+    display: flex;
+    margin-top: 10px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+.balance-content span{
+    font-size: 16px;
+    display: flex;
+    border-radius: 20px;
+    border: solid 1px black;
+    font-weight: bold;
+    padding: 2px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    align-items: center;
+}
+
+.balance-content span svg{
+    margin-right: 15px;
+}
+
+.balance-content span p{
+    margin-top: 3%;
+}
+
+.coins{
+    margin-right: 20px;
+}
+
+.radio-inputs {
+    position: relative;
+    display: flex;
+    border-radius: 0.5rem;
+    background-color: #70c489;
+    box-sizing: border-box;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 1rem 1rem 0 1rem;
+}
+  
+.radio-inputs .radio input {
+    display: none;
+}
+
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    transition: all 0.15s ease-in-out;
+    position: relative;
+}
+
+.radio-inputs .radio input:checked + .name {
+    background-color: white;
+    font-weight: 600;
+}
+
+.radio-inputs .radio input + .name:hover {
+    color: white;
+}
+    
+.radio-inputs .radio input:checked + .name:hover {
+    color: #006616;
+}
+
+.radio-inputs .radio input:checked + .name::after,
+.radio-inputs .radio input:checked + .name::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #70c489;
+    bottom: 0;
+}
+
+.radio-inputs .radio input:checked + .name::after {
+    right: -10px;
+    border-bottom-left-radius: 300px;
+    box-shadow: -3px 3px 0px 2px white;
+}
+
+.radio-inputs .radio input:checked + .name::before {
+    left: -10px;
+    border-bottom-right-radius: 300px;
+    box-shadow: 3px 3px 0px 2px white;
+}

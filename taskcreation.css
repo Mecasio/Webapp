@@ -1,0 +1,111 @@
+.task-creation-form .taskfield input{
+    outline: none;
+    height: 30px;
+    border: 1px solid black ;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.task-creation-form {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+}
+
+.task-creation-form .taskfield{
+    display: flex;
+    flex-direction: column;
+}
+
+.task-creation-form .taskfield label,
+.task-creation-form .taskfield2 label{
+    font-size: 13px;
+}
+
+.task-creation-form .taskfield textarea{
+    resize: none;
+    outline: none;
+    padding: 10px;
+    border: solid 1px;
+}
+
+.task-creation-form .SelectionField{
+    display: flex;
+    flex-direction: column;
+}
+
+.task-creation-form .task-more-details{
+    padding: 20px;
+    border: solid 1px black;
+}
+
+.task-creation-form .SelectionField label{
+    padding-bottom: 3px;
+}
+
+.task-creation-form .Slctn select{
+    outline: none;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Slctn{
+    gap: 5px;
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"]:hover{
+    cursor: pointer;
+}
+
+.Slctn label{
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.field-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input[type="date"]{
+    width: 150px;
+    height: 22px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="date"]:hover, input[type="date"]::-webkit-calendar-picker-indicator{
+    cursor: pointer;
+}
+
+input[type="date"]:focus{
+    outline: none;
+}
+
+form .submit-btn{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    
+}
+
+form .submit-btn input{
+    width: 100px;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 8px 0;
+    background-color: #2480f0;
+    border: solid 2px #2170cf;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+form .submit-btn .cancel-btn{
+    background-color: #f5001d;
+    border: solid 2px #ed0c13;
+}

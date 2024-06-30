@@ -1,0 +1,591 @@
+
+<!--This code below ensure that the user cant access this page until he log-in.
+    And everytime the user try to access this page without being login, the 
+    page will redirect the user to login page.
+
+
+<?php 
+    session_start();
+    if(!isset($_SESSION['unique_id'])){
+        header("location: index.php");
+    }
+?>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/06d9228588.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="x-icon" href="src/image/favicon-32x32.png">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="inventory.css">
+    <link rel="stylesheet" type="text/css" href="shop.css">
+    <link rel="stylesheet" type="text/css" href="history.css">
+    <link rel="stylesheet" type="text/css" href="profileuser.css">
+    <link rel="stylesheet" type="text/css" href="tasklist.css">
+    <link rel="stylesheet" type="text/css" href="taskcreation.css">
+    <link rel="stylesheet" type="text/css" href="settings.css">
+    <link rel="stylesheet" href="searchbar.css">
+    <link rel="stylesheet" href="notification.css">
+    <title>Home</title>
+</head>
+<body>
+    <section class="webpage">
+    <!-- This is the code for any php that will be use to call the data in the users table in solo leveling app database 
+    <?php
+        /* This is the code that call the user's data from the table */
+        include_once "src/php/config.php";
+        $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+        if(mysqli_num_rows($sql) > 0){
+            $row = mysqli_fetch_assoc($sql);
+        }
+
+        /* This is the if else conditional statements I did to change the color of a word
+            if the user is online the world will change to green else it will change to color gray indicating that we was offline.
+        */
+        if($row['status'] == "Online"){
+            $color = 'green';
+        } else {
+            $color = 'gray';
+        }
+        /* This is the code to convert the numerical value of date into the string*/
+        $numericalDate = $row['registration_date'];
+        $Date = date("d M Y, H:i", strtotime($numericalDate)); 
+
+        //I formatted the date into the format of day month year, hours: minute
+        $newnumericalDate = $row['last_activity'];
+        $LastActivityDate = date("d M Y, H:i", strtotime($newnumericalDate)); 
+
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            /* 
+                This code everyone is tinitignan niya kung may laman yung nationality at residence 
+                so kapag may laman pede nating maedit yung mlaman na iyon...
+            */
+            if (isset($_POST['nationality']) && isset($_POST['residence'])) {
+                
+                $nationality = mysqli_real_escape_string($conn, $_POST['nationality']);
+                $residence = mysqli_real_escape_string($conn, $_POST['residence']);
+                $opass = mysqli_real_escape_string($conn, $_POST['opass']);
+                $npass = mysqli_real_escape_string($conn, $_POST['npass']);
+                $rpass = mysqli_real_escape_string($conn, $_POST['rpass']);
+        
+                // Iuupdate yung data sa database
+                $sql = "UPDATE users SET nationality='$nationality', residence='$residence' WHERE unique_id = {$row['unique_id']}";
+                
+                /* 
+                    Ito namang code na ito is ichenicheck niya if yung opass ay walang laman since bawal
+                    idisplay yung password directly sa interface so kapag kapag meron mageeror yung code naito.
+                */
+
+                if (!isset($_POST['opass'])){
+
+                    /* after na icheck ng condition yung code ichecheck naman nito kung yung old password na inenter ng user is 
+                        same as the password that stored in the database if not it will display the warning message else maeedit natin yung
+                        password natin.
+                    */
+
+                    if($opass !== $row['password']){
+                        echo "You entered the wrong password";
+                    } else {
+                        /* Dito naman is chinicheck niya id yung new password na inenter ng user is the same as the confirm password 
+                            and kapag hindi siya same mageeror siya at magdidispllay ng warning rin 
+                        */
+                        if($npass === $rpass){
+                            $sql = "UPDATE users SET password='$npass' WHERE unique_id = {$row['unique_id']}";
+                        } else{
+                            echo "The password you entered is not the same";
+                        }
+                    }
+                }
+
+                /* 
+                    itong code naman na ito is yung parang magiging warning and alert boxes natin.
+                    if the data was successfully updated then magdidisplay siya ng data is successfully updated
+                    else magerror siya and di siya maguupdate.
+                */
+
+                if (mysqli_query($conn, $sql)) {
+                    echo '<div class="notification-view-container">
+                    <div class="notification-view-content">
+                    </div>
+                </div>';
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            }
+        } 
+    ?>
+    -->
+
+    <!-- This is the navbar, dito nakalagay yung mga important button -->
+        <div class="webpage-content">
+            <div class="navbar">
+                <div class="navbar-content">
+                    <div class="user-profile">
+                        <div class="user-img">
+                            <img src="user-default-image.jpg" alt="">
+                        </div>
+                        
+                        <div class="user-name">
+                            <div class="username-details">
+                                <div class="img-cont">
+                                    <div class="user-img-dtls">
+                                        <img src="user-default-image.jpg" alt="">
+                                    
+                                        <div class="user-indicator"></div>
+                            
+                                    </div>
+                                </div>
+                                <div class="user-dtls">
+                                    <p class="username">MyCrown</p><br>
+                                    <div class="level-exp-bar">
+                                        <div class="level">
+                                            <h5>LV</h5>
+                                            <p>4</p>
+                                        </div>
+                                        <div class="exp-bar-container">
+                                            <div class="exp-bar">
+                                                <div class="exp"></div>
+                                            </div>
+                                            <div class="exp-num">0/100</div>
+                                        </div>
+                                        <div class="exp-settings">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    
+                    <div class="menu">
+                        <ul>
+                            <li class="profile-btn">
+                                <i class="fa-solid fa-user"></i>
+                                <div class="label">Profile Information</div>
+                            </li>
+                            
+                            <li class="inventory-btn">
+                                <i class="fa-solid fa-toolbox"></i>
+                                <div class="label">Inventory Details</div>
+                            </li>
+                            
+                            <li class="shop-btn">
+                                <i class="fa-solid fa-shop"></i>
+
+                                <div class="label">Shop Overview</div>
+                            </li>
+                            
+                            <li class="history-btn">
+                                <i class="fa-solid fa-clock"></i>
+
+                                <div class="label">History Log</div>
+                            </li>
+                            
+                            <li class="tasklist-btn">
+                                <i class="fa-regular fa-clipboard"></i>
+
+                                <div class="label">Tasklist Info</div>
+                            </li>
+                            <!--This is the code for log out logic, if the user clicked this it will display in the database 
+                                that the user status now changed to offline.
+                            -->
+                            <a href="src/php/logout.php?logout_id=<?php echo $row['unique_id']?>" style="text-decoration: none;">
+                                <li>
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <div class="label">Logout</div>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        <!-- This is the task form, ito yung code ng task creation form -->  
+
+            <div class="task-creation-container">
+                <div class="task-creation-content">
+                    <form action="#" class="task-creation-form">
+                        <div class="taskfield">
+                            <label>Task Name</label>
+                            <input type="text" name="tname">
+                        </div>
+                        <div class="taskfield">
+                            <label>Task Description</label>
+                            <textarea name="tdesc" cols="30" rows="7" ></textarea>
+                        </div>
+                        <div class="task-more-details">
+                            <div class="field-container">
+                                <div class="taskfield2 SelectionField">
+                                    <label>Task Type</label>
+                                        <div class="Slctn">
+                                            <select name="taskType">
+                                            <option value="1">Habit Task</option>
+                                            <option value="2">Daily Task</option>
+                                            <option value="3">MIllineal Task</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="taskfield2 SelectionField">
+                                    <label>Type of Priority</label>
+                                    <div class="Slctn">
+                                        <input type="radio" name="priority1" value="1"><label>Low</label>
+                                        <input type="radio" name="priority1" value="2"><label>Medium</label>
+                                        <input type="radio" name="priority1" value="3"><label>High</label>  
+                                    </div>
+                                </div>
+
+                                <div class="taskfield2 SelectionField">
+                                    <label>Deadline</label>
+                                    <input type="date" name="deadline">
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                        <div class="taskfield2 submit-btn">
+                            <input type="reset" value="Cancel" class="cancel-btn">
+                            <input type="submit" value="Add">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        <!-- This is the notification code -->  
+
+            <div class="notification-view-container">
+                <div class="notification-view-content">
+                </div>
+            </div>
+
+        <!-- Ito naman yung container ng profile, in default nasa user information ito -->
+
+        <!--
+            Pero kapag kiniclick yung settings-btn which is nasa unordered list under the previous container,
+            pupunta siya dito which is naglalaman ng settings, dito pwede maedit ni user yung account niya such as
+            editing their information 
+        -->
+            <div class="profile-view-container2">
+                <div class="profile-view-content2">
+                    <div class="profile-content-container">
+                        
+                    </div>
+                </div>
+            </div>
+
+        <!-- This is the code for homepage which is not still done, but still it have some basic ui elements such as create task button
+        notification button, search bar, user's name and other etc. -->
+
+            <div class="homepage">
+                <div class="homepage-content">  
+                    <div class="homepage-navbar">
+                        <!--Dito yung code para sa user-->
+                        <div class="user-container">
+                            <p class="user-class">Class: Warrior</p>
+                        </div>
+
+                        <div class="home-menu">
+                            <p class="user-detailedname" id="name">Arden Mecasio</p>
+                            <div class="home-menu-btn">
+                                <!--Button for Create Task-->
+                                <button type="button" class="create-task-btn" id="myBtn">
+                                    <span class="button__text">Create</span>
+                                    <span class="button__icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                                </button>
+
+                                <!-- Ito naman ay for searchbar-->
+                                <div class="searchbar-container">
+                                    <form class="searchbar">
+                                        <button>
+                                            <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                                                <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </button>
+                                        <input class="input" placeholder="Search Items, User, ..." required="" type="text" tabindex="-1">
+                                        <button class="reset" type="reset">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </div>
+
+                                <!--Ito naman ay paara sa notification bell button-->
+                                <div class="button">
+                                    <button class="notification-btn">
+                                        <svg viewBox="0 0 448 512" class="bell">
+                                            <path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>                   
+                        </div>
+                    </div>
+
+                    <div class="profile-view-container">
+                        <div class="profile-view-content">
+                            <div class="profile-content-container">
+                                <div class="profile-navbar">
+                                    <div class="profile-user-details">
+                                        <div class="profile-user-name">
+                                            <p style="font-size: 30px; font-weight: 600;">User: Mycrown</p>
+                                            <p class="status" style="color: green; margin-top: 20px;">Online</p>
+                                        </div>
+                                        <div class="profile-user-menu">
+        
+                                            <!--Heres the button for the menu of profile page-->
+        
+                                            <ul class="user-menu">
+                                                <li class="info this-is-active">Information</li>
+                                                <li class="settings-btn">Settings</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-image">
+                                        <img src="user-default-image.jpg">
+                                    </div>
+                                </div>
+                                <div class="profile-body">
+                                    <div class="profile-body-content">
+                                        <div class="profile-user-data data-con">
+                                            <div class="data-field">
+                                                Name
+                                            </div>
+                                            <div class="data-field user-data">
+        
+                                            <!--Itong code na ito everyone, ay kinukuha niya yung data from database and ididisplay niya ito.-->
+        
+                                                Arden Mecasio
+                                            </div>
+                                        </div>
+                                        <div class="profile-user-data data-con">
+                                            <div class="data-field">
+                                                Place of residence
+                                            </div>
+                                            <div class="data-field user-data">
+                                                Philippines
+                                            </div>
+                                        </div>
+                                        <div class="profile-user-data data-con">
+                                            <div class="data-field">
+                                                Registered
+                                            </div>
+                                            <div class="data-field user-data">
+                                                JULY 27, 2024
+                                            </div>
+                                        </div>
+                                        <div class="profile-user-data data-con">
+                                            <div class="data-field">
+                                                Last activity
+                                            </div>
+                                            <div class="data-field user-data">
+                                                JULY 27, 2024
+                                            </div>
+                                        </div>
+                                        <div class="profile-user-data">
+                                            <div class="data-field">
+                                                Task Complission Rating
+                                            </div>
+                                            <div class="data-field user-data">
+                                                Complete 15, Uncomplete +20
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-view-container1" id="profile-view-container1">
+                        <div class="profile-view-content1" id="profile-view-content1">
+                            <div class="profile-content-container">
+                                <div class="profile-navbar">
+                                    <div class="profile-user-details">
+                                        <div class="profile-user-name">
+                                            <p style="font-size: 30px; font-weight: 600;">User: Mycrown</p>
+                                            <p class="status" style="color: green; margin-top: 20px;">Online</p>
+                                        </div>
+                                        <div class="profile-user-menu">
+        
+                                            <!--Heres the button for the menu of profile page-->
+        
+                                            <ul class="user-menu">
+                                                <li class="info-btn">Information</li>
+                                                <li class="settings-btn this-is-active">Settings</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="profile-user-image">
+                                        <img src="user-default-image.jpg">
+                                    </div>
+                                </div>
+                                <div class="profile-body">
+                                    <div class="profile-body-content">
+                                        <form action="Home.php" method="POST">
+                                            <div class="user-field-input">
+                                                <label>Your Name</label>
+                                                <input type="text" value="Arden Mecasio">
+                                            </div>
+                                            <div class="user-field-input">
+                                                <label>Your E-mail</label>
+                                                <input type="email" value="4rdenmecasi0@gmail.com">
+                                            </div>
+                                            <div class="user-field-inputs">
+                                                <div class="place-res">
+                                                    <label>Place of residence</label>
+                                                    <input type="text" name="residence" value="Philippines">
+                                                </div>
+                                                <div class="nationality">
+                                                    <label>Nationality</label>
+                                                    <input type="text" name="nationality" value="Filipino">
+                                                </div>
+                                            </div>
+                                            <div class="user-field-input">
+                                                <div class="change-password">
+                                                    
+                                                    <div class="pass-field">
+                                                        <label>Old password</label>
+                                                        <input type="password" name="opass" id="opass" placeholder="Enter your old password">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </div>
+                                                    <div class="pass-field">
+                                                        <label>New password</label>
+                                                        <input type="password" name="npass" id="npass" placeholder="Enter new password">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </div>
+                                                    <div class="pass-field">
+                                                        <label>Repear new password</label>
+                                                        <input type="password" name="rpass" id="rpass" placeholder="Confirm new password">
+                                                        <i class="fa-solid fa-eye"></i>
+                                                    </div>
+        
+                                                </div>
+                                            </div>
+                                            <div class="user-field-input-char">
+                                                <label>Character</label>
+                                                <button>Change Character</button>
+                                            </div>
+        
+                                            <div class="user-field-input-btn">
+                                                <input type="submit" value="Save">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inventory-view-container">
+                        <div class="inventory-view-content">
+                            <div class="iventory-view">
+                                <div class="inventory-nav">
+                                    <div class="inventory-navbar">
+                                        <h1>Inventory</h1>
+                                        <div class="radio-inputs">
+                                            <label class="radio">
+                                              <input type="radio" name="radio" checked="" />
+                                              <span class="name">All</span>
+                                            </label>
+
+                                            <label class="radio">
+                                              <input type="radio" name="radio" />
+                                              <span class="name">Weapon</span>
+                                            </label>
+                                          
+                                            <label class="radio">
+                                              <input type="radio" name="radio" />
+                                              <span class="name">Food</span>
+                                            </label>
+
+                                            <label class="radio">
+                                                <input type="radio" name="radio" />
+                                                <span class="name">Armor</span>
+                                            </label>
+
+                                            <label class="radio">
+                                                <input type="radio" name="radio" />
+                                                <span class="name">Items</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="inventory-filter">
+                                        <p>Filter </p>
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </div>
+                                </div>
+                                <div class="storage-inventory">
+                                    <div id="inventory" data-columns=10 data-rows=6></div>
+                                    <div class="character-invtry">
+                                        
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="shop-view-container">
+                        <div class="shop-view-content">
+                            <div class="iventory-view">
+                                <div class="inventory-nav">
+                                    <div class="inventory-navbar">
+                                        <div class="inventory-header">
+                                            <h1>Shop</h1>
+                                            <div class="balance-container">
+                                                <div class="balance-content">
+                                                    <div class="balance coins">
+                                                        <span>
+                                                            <svg height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#FFDA44;" d="M256,512C114.842,512,0,397.158,0,256S114.842,0,256,0s256,114.842,256,256S397.158,512,256,512z"></path> <path style="fill:#FFA733;" d="M256,0L256,0v5.565V512l0,0c141.158,0,256-114.842,256-256S397.158,0,256,0z"></path> <path style="fill:#EE8700;" d="M256,439.652c-101.266,0-183.652-82.391-183.652-183.652S154.733,72.348,256,72.348 S439.652,154.739,439.652,256S357.266,439.652,256,439.652z"></path> <path style="fill:#CC7400;" d="M439.652,256c0-101.261-82.386-183.652-183.652-183.652v367.304 C357.266,439.652,439.652,357.261,439.652,256z"></path> <path style="fill:#FFDA44;" d="M263.805,241.239c-17.517-9.261-35.631-18.826-35.631-29.761c0-15.348,12.484-27.826,27.826-27.826 s27.826,12.478,27.826,27.826c0,9.217,7.473,16.696,16.696,16.696s16.696-7.479,16.696-16.696c0-27.956-18.867-51.548-44.522-58.842 v-7.94c0-9.217-7.473-16.696-16.696-16.696s-16.696,7.479-16.696,16.696v7.94c-25.655,7.294-44.522,30.886-44.522,58.842 c0,31.044,29.619,46.707,53.413,59.283c17.517,9.261,35.631,18.826,35.631,29.761c0,15.348-12.484,27.826-27.826,27.826 s-27.826-12.478-27.826-27.826c0-9.217-7.473-16.696-16.696-16.696s-16.696,7.479-16.696,16.696 c0,27.956,18.867,51.548,44.522,58.842v7.94c0,9.217,7.473,16.696,16.696,16.696s16.696-7.479,16.696-16.696v-7.94 c25.655-7.294,44.522-30.886,44.522-58.842C317.217,269.478,287.598,253.815,263.805,241.239z"></path> <g> <path style="fill:#FFA733;" d="M272.696,367.304v-7.94c25.655-7.294,44.522-30.886,44.522-58.842 c0-31.044-29.619-46.707-53.413-59.283c-2.616-1.384-5.226-2.777-7.805-4.176v37.875c14.699,7.976,27.826,16.283,27.826,25.584 c0,15.348-12.484,27.826-27.826,27.826V384C265.223,384,272.696,376.521,272.696,367.304z"></path> <path style="fill:#FFA733;" d="M283.826,211.478c0,9.217,7.473,16.696,16.696,16.696s16.696-7.479,16.696-16.696 c0-27.956-18.867-51.548-44.522-58.842v-7.94c0-9.217-7.473-16.696-16.696-16.696v55.652 C271.342,183.652,283.826,196.13,283.826,211.478z"></path> </g> </g></svg>
+                                                            <p>5</p>
+                                                        </span>
+                                                    </div>
+                                                    <div class="balance">
+                                                        <span>
+                                                            <svg height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.001 512.001" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#00C3FF;" d="M507.827,137.848l-75.331-90.397c-3.422-4.106-8.491-6.48-13.836-6.48H93.342 c-5.346,0-10.413,2.374-13.836,6.48L4.174,137.848c-5.436,6.523-5.577,15.957-0.339,22.64L241.826,464.13 c7.211,9.2,21.139,9.2,28.35,0l237.991-303.643C513.403,153.804,513.262,144.371,507.827,137.848z"></path> <polygon style="fill:#40D2FF;" points="256.001,40.971 165.951,149.031 346.051,149.031 "></polygon> <path style="fill:#00AAF0;" d="M165.951,149.031L86.083,42.541c-2.51,1.108-4.778,2.751-6.577,4.91L4.174,137.848 c-2.7,3.241-4.08,7.199-4.158,11.183H165.951z"></path> <path style="fill:#80E1FF;" d="M346.051,149.031l79.867-106.49c2.51,1.108,4.778,2.751,6.577,4.91l75.331,90.397 c2.7,3.241,4.08,7.199,4.158,11.183H346.051z"></path> <g> <path style="fill:#00C3FF;" d="M511.985,149.031H0.016c-0.078,4.034,1.183,8.093,3.819,11.457L241.826,464.13 c7.211,9.2,21.139,9.2,28.35,0l237.991-303.643C510.802,157.124,512.061,153.065,511.985,149.031z"></path> <path style="fill:#00C3FF;" d="M256.001,471.03c5.285,0,10.57-2.3,14.175-6.9l237.991-303.643 c2.636-3.363,3.896-7.422,3.819-11.457H256.001V471.03z"></path> </g> <path style="fill:#00AAF0;" d="M259.116,470.689c5.807-21.485,86.934-321.658,86.934-321.658h-180.1l86.934,321.658 C254.95,471.049,257.051,471.049,259.116,470.689z"></path> </g></svg>
+                                                            <p>0</p>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shop-content">
+                                    <div class="shop-menu-sidebar">
+                                        
+                                    </div>
+                                    <div class="shop-item-list">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-view-container">
+                        <div class="history-view-content">
+                            This is history
+                        </div>
+                    </div>
+
+                    <div class="tasklist-view-container">
+                        <div class="tasklist-view-content">
+                            This is Task List
+                        </div>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="scripts.js"></script>
+    <script src="inventory.js"></script>
+    <script src="src/lib/pass.js"></script>
+</body>
+</html>
